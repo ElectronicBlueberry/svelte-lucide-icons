@@ -2,7 +2,7 @@
   "name": "svelte-lucide-icons",
   "version": "0.1.0",
   "type": "module",
-  "description": "Unoffical Lucide Icons port for Svelte and SvelteKit",
+  "description": "Unofficial Lucide Icons port for Svelte and SvelteKit",
   "scripts": {
     "build:icons": "node scripts/build",
     "build:package": "npx svelte-kit package",

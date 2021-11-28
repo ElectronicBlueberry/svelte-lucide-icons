@@ -2,7 +2,7 @@
 
 This package is still in alpha! Use at your own risk.
 
-An unoffical port of [Lucide](https://github.com/lucide-icons/lucide) icons.  
+An unofficial port of [Lucide](https://github.com/lucide-icons/lucide) icons.  
 Lucide is a branch of feather icons.
 
 ## Usage
@@ -35,3 +35,7 @@ The following props are available:
 * `size` Sets width and height
 * `color`
 * `strokeWidth`
+
+## Compiling
+
+Clone this repo, run `npm install` and then `npm run build`
