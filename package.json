@@ -1,5 +1,5 @@
 {
-  "name": "svelte-lucide-icons",
+  "name": "lucide-icons-svelte",
   "version": "0.1.0",
   "type": "module",
   "description": "Unofficial Lucide Icons port for Svelte and SvelteKit",

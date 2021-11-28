@@ -1,4 +1,4 @@
-# svelte-lucide-icons
+# lucide-icons-svelte
 
 This package is still in alpha! Use at your own risk.
 
@@ -9,13 +9,13 @@ Lucide is a branch of feather icons.
 
 ### Install
 
-`npm install --save-dev svelte-lucide-icons`
+`npm install --save-dev lucide-icons-svelte`
 
 ### Import as component
 
 ```svelte
 <script>
-    import SearchIcon from "svelte-lucide-icons/search.svelte"
+    import SearchIcon from "lucide-icons-svelte/search.svelte"
 </script>
 
 <SearchIcon />
@@ -23,7 +23,7 @@ Lucide is a branch of feather icons.
 
 You can also use named imports:
 
-`import { Search } from "svelte-lucide-icons"`
+`import { Search } from "lucide-icons-svelte"`
 
 This is however **not recommended**, as it will lead to massive performance issues while in dev mode in SvelteKit.
 
