@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Unofficial Lucide Icons port for Svelte and SvelteKit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ElectronicBlueberry/svelte-lucide-icons.git",
+    "directory": "package"
+  },
   "scripts": {
     "build:icons": "node scripts/build",
     "build:package": "npx svelte-kit package",
