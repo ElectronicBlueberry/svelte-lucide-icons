@@ -3,8 +3,12 @@ import { resolve } from "path"
 import * as fs from "fs"
 
 const scriptTag = `<script>
-  export let width = 24;
-  export let height = 24;
+  export let size = "100%";
+  export let color = "currentColor";
+  export let strokeWidth = "2";
+  
+  let customClass = "";
+  export { customClass as class };
 </script>
 `;
 
@@ -16,11 +20,28 @@ const scriptTag = `<script>
 function replaceProps(iconSource) {
 	const widthRegex = /(^\s*width=)("[0-9]+")($)/gm;
 	const heightRegex = /(^\s*height=)("[0-9]+")($)/gm;
+	const colorRegex = /(^\s*stroke=)("[a-z0-9]+")($)/gmi;
+	const strokeWidthRegex = /(^\s*stroke-width=)("[0-9]+")($)/gm;
 	
-	iconSource = iconSource.replace(widthRegex, "$1{width}$3");
-	iconSource = iconSource.replace(heightRegex, "$1{height}$3");
+	iconSource = iconSource.replace(widthRegex, "$1{size}$3");
+	iconSource = iconSource.replace(heightRegex, "$1{size}$3");
+	iconSource = iconSource.replace(colorRegex, "$1{color}$3");
+	iconSource = iconSource.replace(strokeWidthRegex, "$1{strokeWidth}$3");
 	
 	return iconSource;
+}
+
+
+/**
+ * Inject custom props into the svg component
+ * @param {string} iconSource 
+ * @returns {string}
+ */
+function injectProps(iconSource) {
+	let lines = iconSource.split('\n');
+	lines.splice(1, 0, `  class="lucide {customClass}"`);
+	//lines.splice(1, 0, `  {...$$props}`);
+	return lines.join("\n");
 }
 
 
@@ -40,7 +61,12 @@ function prependScriptTag(iconSource) {
  * @returns {string}
  */
 function buildExportLine(iconName) {
-	return `export { default as ${iconName} } from "./components/${iconName}.svelte";\n`;
+	return `export { default as ${captialize(iconName)} } from "../${iconName}.svelte";\n`;
+}
+
+
+function captialize(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 
@@ -48,24 +74,32 @@ function buildExportLine(iconName) {
 
 let moduleSource = "";
 
-const componentPath = resolve("./src/lib");
+const iconPath = resolve("./src/lib");
 
-if (fs.existsSync(componentPath)) {
-	fs.rmdirSync(componentPath, {recursive: true});
+if (fs.existsSync(iconPath)) {
+	fs.rmdirSync(iconPath, {recursive: true});
 }
-fs.mkdirSync(resolve("./src/lib"), {recursive: true});
+fs.mkdirSync(iconPath, {recursive: true});
 
 for (const iconName in icons) {
 	if (Object.hasOwnProperty.call(icons, iconName) && iconName !== "default") {
 		let iconSource = icons[iconName];
 		
+		iconSource = injectProps(iconSource);
 		iconSource = replaceProps(iconSource);
 		iconSource = prependScriptTag(iconSource);
 		
-		fs.writeFileSync(resolve(`./src/lib/${iconName}.svelte`), iconSource, {flag: "w+"});
+		fs.writeFileSync(resolve(iconPath, `${iconName}.svelte`), iconSource, {flag: "w+"});
 		
 		moduleSource += buildExportLine(iconName);
 	}
 }
 
-//fs.writeFileSync("./dist/index.js", moduleSource, {flag: "w+"});
+const modPath = resolve("./src/lib/mod");
+
+if (fs.existsSync(modPath)) {
+	fs.rmdirSync(modPath, {recursive: true});
+}
+fs.mkdirSync(modPath, {recursive: true});
+
+fs.writeFileSync(resolve(modPath, "index.js"), moduleSource, {flag: "w+"});
