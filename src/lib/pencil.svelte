@@ -1,0 +1,18 @@
+<script>
+  export let width = 24;
+  export let height = 24;
+</script>
+<svg
+  width={width}
+  height={height}
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <line x1="18" y1="2" x2="22" y2="6" />
+  <path d="M7.5 20.5L19 9l-4-4L3.5 16.5 2 22l5.5-1.5z" />
+</svg>

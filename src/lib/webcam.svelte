@@ -1,0 +1,19 @@
+<script>
+  export let width = 24;
+  export let height = 24;
+</script>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={width}
+  height={height}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="10" r="8" />
+  <circle cx="12" cy="10" r="3" />
+  <path d="M12 22v-4m-5 4h5-5zm10 0h-5 5z" />
+</svg>
