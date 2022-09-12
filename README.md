@@ -3,7 +3,7 @@
 This package is still in alpha! Use at your own risk.
 
 An unofficial port of [Lucide](https://github.com/lucide-icons/lucide) icons.  
-Lucide is a branch of feather icons.
+Lucide is a fork of feather icons.
 
 ## Usage
 
